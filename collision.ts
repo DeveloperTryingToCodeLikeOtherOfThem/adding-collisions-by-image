@@ -10,7 +10,7 @@ namespace advancedCollisions {
             this._oy = oy
         }
 
-        //% block="set all advanced collision tiles of type %collisionImage=tileset_tile_picker to walls for %sprite=variables_get(mySprite) with offset X %ox offset Y %oy"
+        //% block="set all advanced collision tiles of type $this(collisionSprite)%collisionImage=tileset_tile_picker to walls for %sprite=variables_get(mySprite) with offset X %ox offset Y %oy"
         //% weight=98
         setAllAdvancedTiles(collisionImage: Image, wall: boolean = true) {
             const sc = game.currentScene().tileMap
