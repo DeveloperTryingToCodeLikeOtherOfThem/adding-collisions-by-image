@@ -11,7 +11,7 @@ namespace advancedCollisions {
             this._ox = ox
             this._oy = oy
         }
-         //% block="%collisionImage=tileset_tile_picker %sprite=variables_get(mySprite) %ox %oy" 
+         //% block="set advanced collision %collisionImage=tileset_tile_picker %sprite=variables_get(mySprite) %ox %oy"
         //% weight=199
         setAdvancedCollision(collisionImage: Image, sprite: Sprite, ox: number, oy: number) {
             let collision = sprites.create(collisionImage)
