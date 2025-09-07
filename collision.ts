@@ -12,6 +12,7 @@ namespace advancedCollisions {
             this._oy = oy
         }
          //% block="%collisionImage=tileset_tile_picker %sprite=variables_get(mySprite) %ox %oy" 
+        //% weight=199
         setAdvancedCollision(collisionImage: Image, sprite: Sprite, ox: number, oy: number) {
             let collision = sprites.create(collisionImage)
 
@@ -33,6 +34,7 @@ namespace advancedCollisions {
     }
     
     //% block="create a new collision for the tilemap for like new slopes or extra cool effects for the tilemap tile collisions %sprite=variables_get(mySprite) %ox %oy"
+    //% weight=200
     export function createCollision(sprite: Sprite, ox: number, oy: number): Collision {
         const collision = new Collision(sprite, ox, oy)
         return collision
