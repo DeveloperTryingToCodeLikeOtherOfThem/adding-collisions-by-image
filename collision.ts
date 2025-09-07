@@ -31,30 +31,39 @@ namespace advancedCollisions {
                 }
             })
         }
- //% block="set advanced collision for a whole tilemap not just for 1 single tile added to the screen $this(collisionSprite) %collisionImage=tileset_tile_picker %sprite=variables_get(mySprite) %ox %oy"
+ //% block="set advanced collision for a whole tilemap not just for 1 single tile added to the screen $this(collisionSprite) %collisionImage=tileset_tile_picker %sprite=variables_get(mySprite) %ox %oy || %wall"
         //% weight=98
-        setAllAdvancedTilesToTileMapNotJustAddACustomTile(collisionImage: Image, sprite: Sprite, ox: number, oy: number) {
+        setAllAdvancedTilesToTileMapNotJustAddACustomTile(collisionImage: Image, sprite: Sprite, ox: number, oy: number, wall?: boolean) {
             let collision: Sprite = null 
             collision = sprites.create(img`.`)
+            const sc = game.currentScene().tileMap
             for(let tileCollision of tiles.getTilesByType(collisionImage)) {
-                collision = sprites.create(collisionImage)
-                tiles.placeOnTile(collision, tileCollision)
+                collision.setImage(collisionImage)
                 tiles.setTileAt(tileCollision, collision.image)
+                if(wall) {
+                    tiles.setWallAt(tileCollision, wall)
+                } else {
+                    // do not work right now
+                }
             }
-            game.onUpdate(() => {
-                // for left and right collision
-                if (sprite.overlapsWith(collision) && sprite.x <= collision.x) {
-                    sprite.x -= ox
-                } else if (sprite.overlapsWith(collision) && sprite.x >= collision.x) {
-                    sprite.x += ox
-                }
-                // for up and down collision
-                if (sprite.overlapsWith(collision) && sprite.y <= collision.y) {
-                    sprite.y -= oy
-                } else if (sprite.overlapsWith(collision) && sprite.y >= collision.y) {
-                    sprite.y += oy
-                }
-            })
+
+            if(sc.isOnWall(sprite)) {
+                game.onUpdate(() => {
+                    // for left and right collision
+                    if (sprite.overlapsWith(collision) && sprite.x <= collision.x) {
+                        sprite.x -= ox
+                    } else if (sprite.overlapsWith(collision) && sprite.x >= collision.x) {
+                        sprite.x += ox
+                    }
+                    // for up and down collision
+                    if (sprite.overlapsWith(collision) && sprite.y <= collision.y) {
+                        sprite.y -= oy
+                    } else if (sprite.overlapsWith(collision) && sprite.y >= collision.y) {
+                        sprite.y += oy
+                    }
+                })
+            }
+           
         }
     }
     
