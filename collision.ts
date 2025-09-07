@@ -35,6 +35,7 @@ namespace advancedCollisions {
     
     //% block="create a new collision for the tilemap for like new slopes or extra cool effects for the tilemap tile collisions %sprite=variables_get(mySprite) %ox %oy"
     //% weight=100
+      //% blockSetVariable="collisionSprite"
     export function createCollision(sprite: Sprite, ox: number, oy: number): Collision {
         const collision = new Collision(sprite, ox, oy)
         return collision
