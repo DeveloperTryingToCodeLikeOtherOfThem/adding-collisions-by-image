@@ -31,6 +31,31 @@ namespace advancedCollisions {
                 }
             })
         }
+ //% block="set advanced collision for a whole tilemap not just for 1 single tile added to the screen $this(collisionSprite) %collisionImage=tileset_tile_picker %sprite=variables_get(mySprite) %ox %oy"
+        //% weight=98
+        setAllAdvancedTilesToTileMapNotJustAddACustomTile(collisionImage: Image, sprite: Sprite, ox: number, oy: number) {
+            let collision: Sprite = null 
+            collision = sprites.create(img`.`)
+            for(let tileCollision of tiles.getTilesByType(collisionImage)) {
+                collision = sprites.create(collisionImage)
+                tiles.placeOnTile(collision, tileCollision)
+                tiles.setTileAt(tileCollision, collision.image)
+            }
+            game.onUpdate(() => {
+                // for left and right collision
+                if (sprite.overlapsWith(collision) && sprite.x <= collision.x) {
+                    sprite.x -= ox
+                } else if (sprite.overlapsWith(collision) && sprite.x >= collision.x) {
+                    sprite.x += ox
+                }
+                // for up and down collision
+                if (sprite.overlapsWith(collision) && sprite.y <= collision.y) {
+                    sprite.y -= oy
+                } else if (sprite.overlapsWith(collision) && sprite.y >= collision.y) {
+                    sprite.y += oy
+                }
+            })
+        }
     }
     
     //% block="create a new collision for the tilemap for like new slopes or extra cool effects for the tilemap tile collisions %sprite=variables_get(mySprite) %ox %oy"
